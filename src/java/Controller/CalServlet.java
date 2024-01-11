@@ -56,7 +56,34 @@ public class CalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        String num1 = request.getParameter("first");
+        String num2 = request.getParameter("second");
+        String options = request.getParameter("options");
+        //    response.setContentType("text.html");
+        double first = Double.parseDouble(num1);
+        double second = Double.parseDouble(num2);
+        double result = 0;
+        switch (options) {
+            case "+" ->
+                result = first + second;
+            case "-" ->
+                result = first - second;
+            case "*" ->
+                result = first * second;
+            case "/" -> {
+                if (second == 0) {
+                    response.getWriter().println("Error: Cannot divide by zero");
+                    return;
+                } else {
+                    result = first / second;
+                }
+            }
+            default -> {
+            }
+        }
+        response.setContentType("text.html");
+        response.getWriter().println(result);
     }
 
     /**

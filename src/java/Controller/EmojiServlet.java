@@ -69,32 +69,20 @@ public class EmojiServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-//        String message = request.getParameter("message");
-//        String[] emojiCode = message.split(":");
-//        String output = "";
-//
-//        for (String code : emojiCode) {
-//            if (isEmojiCode(code)) {
-//                output += getEmojiImage(code);
-//            } else {
-//                output += code;
-//            }
-//        }
-//
-//        response.setContentType("text/html");
-//        PrintWriter out = response.getWriter();
-//        out.println(output);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head></head>");
+            out.println("<body>");
+            String mes = request.getParameter("message");
+            String emojiMes = convertEmoji(mes);
+            out.println("<input type='text' name='message' style='height: 20px' value='" + emojiMes + "'/>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
-//
-//    private static boolean isEmojiCode(String code) {
-//        return code.matches("[\\u2600-\\u27BF]");
-//    }
-//
-//    private static String getEmojiImage(String code) {
-//        return String.format("<img src=\"https://twemoji.maxcdn.com/v/13.0.0/svg/%s.svg\" alt=\"%s\">", code, code);
-//    
-//    }
 
     /**
      * Returns a short description of the servlet.
@@ -105,5 +93,13 @@ public class EmojiServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    private String convertEmoji(String mes) {
+        String newMes = "";
+        newMes = mes.replaceAll("<3", "&#129505");
+        newMes = mes.replaceAll(":>", "&#128512");
+        newMes = mes.replaceAll(":<", "&#128531");
+        //thêm cái emoji vào
+        return newMes;
+    }
 }

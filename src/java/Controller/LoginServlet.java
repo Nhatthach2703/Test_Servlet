@@ -6,6 +6,8 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,18 +59,36 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
+        ServletConfig config = getServletConfig();
+        String user = config.getInitParameter("username");
+        String pass = config.getInitParameter("password");
         
         //Get form data from html
         String u = request.getParameter("username");
         String p = request.getParameter("password");
-        //sent the request content
+        
+        if(u.equals(user) && p.equals(pass)){
+//            RequestDispatcher rd = request.getRequestDispatcher("WelcomeServlet");
+//            rd.include(request, response);
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.print("<html><body>");
-        out.print("<h1>You sent me:</h1>");
-        out.print(u+"<br>"+p);
+        out.print("<h1>Welcome!</h1>" + u);
         out.print("</body></html>");
         out.print("<html>");
+        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("index.html");
+            rd.forward(request, response);
+        }
+        
+        //sent the request content
+//        response.setContentType("text/html");
+//        PrintWriter out = response.getWriter();
+//        out.print("<html><body>");
+//        out.print("<h1>You sent me:</h1>");
+//        out.print(u+"<br>"+p);
+//        out.print("</body></html>");
+//        out.print("<html>");
     }
 
     /**

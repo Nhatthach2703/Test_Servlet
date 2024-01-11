@@ -75,10 +75,31 @@ public class GeoServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         out.println("<html><body>");
+        out.print("""
+                  <h3>Favorite geometry</h3>
+                          <form name="geometry" action="GeoServlet" method="post">
+                              <table>
+                                  <tr>
+                                  <p>Please choose your favourite geometry</p>
+                                  </tr>
+                                  <tr>
+                                      <td></td><td>
+                                          <select name="geo">
+                                              <option value="c">Circle</option>
+                                              <option value="t">Triangle</option>
+                                              <option value="s">Square</option>
+                                              <option value="r">Rectangle</option>
+                                          </select></td>
+                                  </tr>
+                                  <tr>
+                                      <td></td><td><input type="submit" value="Choose"/></td>
+                                  </tr>
+                              </table>
+                          </form>""");
         switch (geo) {
             case "c":
                 out.println("<h3>Circle</h3>");
-                out.println("<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Circle_-_black_simple.svg/220px-Circle_-_black_simple.svg.png\">");
+                out.println("<img src='images/Circle.png'>");
                 break;
             case "t":
                 out.println("<h3>Triangle</h3>");

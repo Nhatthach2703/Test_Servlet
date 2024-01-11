@@ -7,8 +7,16 @@
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>Controller.LoginServlet</servlet-class>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>admin</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>12345</param-value>
+        </init-param>
     </servlet>
-    <servlet>
+    <servlet>        
         <servlet-name>CalServlet</servlet-name>
         <servlet-class>Controller.CalServlet</servlet-class>
     </servlet>
