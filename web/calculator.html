@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#computeBtn').click(function(event) {
+                event.preventDefault(); // Ngăn chặn form gửi dữ liệu một cách thông thường
+
+                var first = $('#first').val();
+                var second = $('#second').val();
+                var options = $('#options').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'CalServlet',
+                    data: { first: first, second: second, options: options },
+                    success: function(response) {
+                        $('#result').val(response);
+                    },
+                    error: function() {
+                        $('#result').val('Error occurred');
+                    }
+                });
+            });
+        });
+    </script>
+    </head>
+    <body>
+        <form action="CalServlet" method="get">
+            <table>
+                <tr>
+                    <td>First:</td><td><input type="text" id="first" name="first"/></td>
+                </tr>
+                <tr>
+                    <td>Second:</td><td><input type="text" id="second" name="second"/></td>
+                </tr>
+                <tr>
+                    <td>Operator:</td>
+                    <td><select id="options" name="options"> 
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                            <option value="*">*</option>
+                            <option value="/">/</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td><td><button id="computeBtn">Compute</button></td>
+                </tr>
+                <tr>
+                    <td>Result:</td><td><input type="text" id="result" name="result"/></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
