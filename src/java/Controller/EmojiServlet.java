@@ -95,11 +95,18 @@ public class EmojiServlet extends HttpServlet {
     }// </editor-fold>
     
     private String convertEmoji(String mes) {
-        String newMes = "";
-        newMes = mes.replaceAll("<3", "&#129505");
-        newMes = mes.replaceAll(":>", "&#128512");
-        newMes = mes.replaceAll(":<", "&#128531");
-        //thêm cái emoji vào
+//        String newMes = "";
+//        newMes = mes.replaceAll(":>", "&#128512");
+//        newMes = mes.replaceAll(":<", "&#128531");
+//        newMes = mes.replaceAll("<3", "&#129505");
+//        newMes = mes.replaceAll("=<<", "&#128545");
+           
+        String newMes = mes
+                .replaceAll(":>", "&#128512")
+                .replaceAll(":<", "&#128531")
+                .replaceAll("<3", "&#129505")
+                .replaceAll("=<<", "&#128545");
+        
         return newMes;
     }
 }
